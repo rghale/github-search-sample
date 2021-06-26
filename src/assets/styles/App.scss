@@ -1,0 +1,374 @@
+:root {
+    --color1: #161b22;
+    --color2: #0d1117;
+    --color3: #21262d;
+    --color4: #f0f6fc;
+    --color5: #1f6feb;
+    --color6: #c9d1d9;
+    --color7: #f0883e;
+    --color8: #56d364;
+    --color9: rgb(214, 40, 40);
+    --color10: #3c3d40;
+}
+
+.gth-body {
+    background-color: var(--color2);
+    font-size: 14px;
+    color: var(--color6);
+
+    h3 {
+        font-size: 1.3rem;
+    }    
+
+    a {
+        color: var(--color5);
+    }
+
+    .react-loading-skeleton {
+        background-color: #636363;
+        background-image: linear-gradient( 
+            90deg
+            ,#636363,#989898,#636363);
+    }
+
+    .pagination {
+        margin: 2rem 0;
+
+        .page-link {
+            background-color: transparent   ;
+            border: 0;
+            color: var(--color6);
+            border-radius: .4rem;
+        }
+
+        .page-item {
+            &.active {
+               .page-link {
+                   background-color: var(--color5);
+                   color: var(--color4);
+               } 
+            }
+        }
+    }
+}
+
+.gth-search-bar {
+    background-color: var(--color1);
+    position: relative;
+
+    .gth-switch-theme {
+        position: absolute;
+        left: .5rem;        
+        color: var(--color6);
+
+        button {
+            box-shadow: none!important;
+            background-color: var(--color10)!important;
+            border: 0!important;
+            font-size: .8rem;
+        }
+
+        .dropdown-menu {
+            background-color: var(--color10);
+            font-size: .8rem;
+
+            a {
+                color: var(--color6);
+
+                &:hover {
+                    background-color: var(--color3);
+                }
+            }
+        }
+    }
+}
+
+.gth-search-form {
+    margin: 0 auto;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+
+    .gth-logo {
+        margin-right: .5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        fill: var(--color4);
+    }
+
+    .gth-input {
+        padding: .15rem .5rem;
+        height: auto;
+        border: 1px solid var(--color3);
+        background-color: var(--color2);
+        color: var(--color4);
+        min-width: 20rem;
+
+        &:focus {
+            background-color: var(--color2);
+            border-color: var(--color5);
+            color: var(--color4);
+        }
+    }
+
+    .gth-short-key {
+        position: absolute;
+        right: .5rem;
+        top: .5rem;
+        display: inline-block;        
+        border: 1px solid var(--color6);
+        padding: 0 .5rem;
+        border-radius: .3rem;
+        color: var(--color6);
+        opacity: .4;
+    }
+}
+
+.gth-main-container {
+    margin-top: 1.5rem;
+}
+
+.gth-search-types-block {
+    border: 1px solid var(--color3);
+    border-radius: .4rem;
+    overflow: hidden;
+
+    a {
+        display: block;
+        padding: .5rem;
+        color: var(--color6);
+        border-bottom: 1px solid var(--color3);
+
+        &:last-child {
+            border-bottom: 0;
+        }
+
+        &:hover {
+            text-decoration: none;
+            color: var(--color6);
+            background-color: var(--color3);
+        }
+
+        &.gth-active {
+            background-color: var(--color3);
+            border-left: 2px solid var(--color7);
+        }
+    }
+}
+
+.gth-result-list {
+
+    .gth-users-list {
+        .gth-s-item {
+            display: flex;
+            align-items: center;
+
+            .gth-s-image {
+                width: 2rem;
+                height: 2rem;
+                margin-right: .5rem;
+                display: inline-block;                
+
+                > span {
+                    position: relative;
+                    height: 100%;
+                    width: 100%;
+                    display: inline-block;
+
+                    > span {
+                        border-radius: 50%;
+                        height: 100%;
+                        position: absolute;
+                        top: 0;
+                    }
+                }
+            }
+
+            .gth-s-text {
+                display: inline-block;
+                width: 5rem;
+            }
+        }
+    }
+
+    .gth-repositories-list {
+        .gth-item {
+            display: flex;
+
+            &.gth-s-item {
+                .gth-icon-container {
+                    .gth-icon-skeleton {
+                        width: 1.2rem;
+                        height: 1.2rem;
+                    }
+                }
+
+                .gth-content {
+                    flex: auto;
+
+                    .gth-title-skeleton {
+                        width: 100px;
+                    }
+                    .gth-description-skeleton {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .gth-icon-container {
+                margin-right: .5rem;
+                opacity: .5;
+            }
+            .gth-content {
+                font-size: .9rem;
+            }
+        }
+
+    }
+
+    .gth-issues-list {
+        .gth-item {
+            display: flex;
+
+            &.gth-s-item {
+                .gth-icon-container {
+                    .gth-icon-skeleton {
+                        width: 1.2rem;
+                        height: 1.2rem;
+                    }
+                }
+
+                .gth-content {
+                    flex: auto;
+
+                    .gth-sub-title-skeleton {
+                        width: 200px;
+                    }
+
+                    .gth-title-skeleton {
+                        width: 100px;
+                    }
+                    .gth-description-skeleton {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .gth-icon-container {
+                margin-right: .5rem;
+                color: var(--color8);
+            }
+
+            .gth-content {
+                font-size: .9rem;
+            }
+
+            .gth-sub-title {
+                display: block;
+                color: var(--color6);
+                font-size: .8rem;
+                opacity: .7;
+            }
+
+            .gth-title {
+                display: block;
+                font-size: 1rem;
+            }
+        }
+    }
+
+    .gth-topics-list {
+        .gth-item {
+            display: flex;
+
+            &.gth-s-item {
+                .gth-icon-container {
+                    .gth-icon-skeleton {
+                        width: 1.2rem;
+                        height: 1.2rem;
+                    }
+                }
+
+                .gth-content {
+                    flex: auto;
+
+                    .gth-title-skeleton {
+                        width: 100px;
+                        margin-bottom: .5rem;
+                    }
+
+                    .gth-description-skeleton {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .gth-icon-container {
+                margin-right: .5rem;
+                opacity: .7;
+            }
+
+            .gth-content {
+                font-size: .9rem;
+            }
+
+
+            .gth-title {
+                display: block;
+                font-size: 1.2rem;
+                margin-bottom: .5rem;
+            }
+        }
+    }
+
+    h3 {
+         text-transform: lowercase; 
+        border-bottom: 1px solid var(--color3);
+        padding: 1rem 0;
+
+        span {
+            display: inline-block;
+
+            &:first-child {
+                margin-right: .5rem;
+            }
+        }
+    }
+
+    .gth-item {
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--color3);
+        font-size: 1.1rem;
+
+        &:last-child {
+            border-bottom: 0;
+        }
+
+        img {
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            margin-right: .5rem;
+        }
+    }
+
+    .gth-empty {
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 500;
+        padding: 2rem 0;
+    }
+}
+
+.gth-first-view {
+    text-align: center;
+    margin: 2rem 0;
+    font-size: 1.5rem;
+}
+
+.gth-error {
+    text-align: center;
+    margin: 2rem 0;
+    font-size: 1.5rem;
+    color: var(--color9);
+}
