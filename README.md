@@ -18,3 +18,14 @@ call you'll likely need to make:
 Documentation: 
 * https://developer.github.com/v3/search/
 * https://api.github.com/search/users?q=exampl
+
+## Technologies
+* Front-end
+    * React JS
+* Front-end modules
+    * react-router-dom
+    * axios
+    * bootstrap
+    * node-sass
+    * react-loading-skeleton
+    * fortawesome
