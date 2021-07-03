@@ -1,6 +1,6 @@
 /**
  * --------------------------------------------------------------------------
- * Topics list
+ * Repositories list
  * Licensed under MIT (https://github.com/rghale/github-search-sample/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -8,14 +8,21 @@
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHashtag } from '@fortawesome/free-solid-svg-icons';
+import { faCode } from '@fortawesome/free-solid-svg-icons';
+import BaseList from './BaseList';
 
-class Topic extends React.Component {
-    render() {
+class Repository extends BaseList {
+    constructor(props) {
+        super(props);
+        this.type = 'repositories';
+        this.title = 'Repositories';
+    }
+
+    renderItem(key, item) {
         let result = null;
-        if (!this.props.item) {
+        if (!item) {
             result =
-                <div className='gth-item gth-s-item'>
+                <div className='gth-item gth-s-item' key={key}>
                     <div className='gth-icon-container'>
                         <Skeleton className='gth-icon-skeleton' />
                     </div>
@@ -29,16 +36,16 @@ class Topic extends React.Component {
         }
         else {
             result =
-                <div className='gth-item'>
+                <div className='gth-item' key={key}>
                     <div className='gth-icon-container'>
-                        <FontAwesomeIcon icon={faHashtag} />
+                        <FontAwesomeIcon icon={faCode} />
                     </div>
                     <div className='gth-content'>
-                        <a className='gth-title' href={`https://github.com/topics/${this.props.item.name}`} target='_blank' rel="noreferrer" title={this.props.item.name}>
-                            {this.props.item.name}
+                        <a href={item.html_url} target='_blank' rel="noreferrer" title={item.full_name}>
+                            {item.full_name}
                         </a>
-                        <div className='gth-description'>
-                            {this.props.item.short_description}
+                        <div>
+                            {item.description}
                         </div>
                     </div>
                 </div>
@@ -48,4 +55,4 @@ class Topic extends React.Component {
     }
 }
 
-export default Topic;
+export default Repository;

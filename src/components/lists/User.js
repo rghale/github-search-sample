@@ -7,14 +7,20 @@
 
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
+import BaseList from './BaseList';
 
-class User extends React.Component {
+class User extends BaseList {
+    constructor(props) {
+        super(props);
+        this.type = 'users';
+        this.title = 'Users';
+    }
 
-    render() {
+    renderItem(key, item) {
         let result = null;
-        if (!this.props.item) {
+        if (!item) {
             result =
-                <div className='gth-item gth-s-item'>
+                <div className='gth-item gth-s-item' key={key}>
                     <span className='gth-s-image'>
                         <Skeleton />
                     </span>
@@ -25,10 +31,10 @@ class User extends React.Component {
         }
         else {
             result =
-                <div className='gth-item'>
-                    <img src={`${this.props.item.avatar_url}&s=80`} alt={this.props.item.login} title={this.props.item.login} />
-                    <a href={this.props.item.html_url} target='_blank' rel="noreferrer" title={this.props.item.login}>
-                        {this.props.item.login}
+                <div className='gth-item' key={key}>
+                    <img src={`${item.avatar_url}&s=80`} alt={item.login} title={item.login} />
+                    <a href={item.html_url} target='_blank' rel="noreferrer" title={item.login}>
+                        {item.login}
                     </a>
                 </div>
         }

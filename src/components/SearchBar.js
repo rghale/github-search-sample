@@ -9,7 +9,6 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Navbar, Form } from 'react-bootstrap';
 import { ReactComponent as Logo } from '../assets/images/logo.svg';
-import { defaultSearchType } from './searchResult/ComponentsList';
 
 class SearchBar extends React.Component {
     constructor(props) {
@@ -43,9 +42,6 @@ class SearchBar extends React.Component {
         }
         else {
             delete urlParams.q;
-        }
-        if (!urlParams.t) {
-            urlParams.t = defaultSearchType;
         }
         let params = [];
         Object.keys(urlParams).forEach(key => {

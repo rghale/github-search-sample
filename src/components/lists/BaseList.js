@@ -1,36 +1,33 @@
 /**
  * --------------------------------------------------------------------------
- * Search result
+ * Base list
  * Licensed under MIT (https://github.com/rghale/github-search-sample/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
 
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-import Pager from './Pager';
-import * as allSearchTypes from './searchResult/ComponentsList';
+import Pager from '../Pager';
 
-
-class Results extends React.Component {
-    searchAPIUrl = 'https://api.github.com/search/';
-    itemPerPage = 10;
-    maxResult = 1000;
+class BaseList extends React.Component {
+    searchAPIUrl = process.env.REACT_APP_SEARCH_API_URL;
+    itemPerPage = process.env.REACT_APP_ITEMS_PER_PAGE;
+    maxResult = process.env.REACT_APP_MAX_ITEMS;
 
     constructor(props) {
         super(props);
         let urlParams = this.getUrlParams();
         this.state = {
             result: {},
-            type: allSearchTypes.searchTypes[urlParams.t] ? urlParams.t : allSearchTypes.defaultSearchType,
             loading: true,
             error: null
         }
         this.search = this.search.bind(this);
         this.lastQuery = urlParams.q;
         this.lastPage = null;
-        this.lastType = this.state.type;
         this._mounted = false;
+        this.type = 'not_implemented';
+        this.title = 'Not Implemented'
     }
 
     search() {
@@ -40,12 +37,11 @@ class Results extends React.Component {
         if (page <= 1 || isNaN(page)) {
             page = 1;
         }
-        if (this.lastQuery === query && this.lastPage === page && this.lastType === this.state.type) {
+        if (this.lastQuery === query && this.lastPage === page) {
             return;
         }
         this.lastQuery = query;
         this.lastPage = page;
-        this.lastType = this.state.type;
         if (query === "") {
             this._mounted && this.setState({
                 result: {},
@@ -54,7 +50,7 @@ class Results extends React.Component {
             });
             return;
         }
-        axios.get(`${this.searchAPIUrl}${this.state.type}`, {
+        axios.get(`${this.searchAPIUrl}${this.type}`, {
             headers: {
                 Accept: 'application/vnd.github.mercy-preview+json',
             },
@@ -90,21 +86,15 @@ class Results extends React.Component {
     }
 
     componentDidUpdate() {
-        let urlParams = this.getUrlParams();
-        if (urlParams.t && urlParams.t !== this.state.type) {
-            this.setState({
-                type: allSearchTypes.searchTypes[urlParams.t] ? urlParams.t : allSearchTypes.defaultSearchType,
-                result: {},
-                loading: this.lastQuery ? true : false
-            });
-        }
-        else {
-            this.search();
-        }
+        this.search();
     }
 
     componentWillUnmount() {
         this._mounted = false;
+    }
+
+    renderItem() {
+        throw new Error("Not implemented!");
     }
 
     render() {
@@ -125,25 +115,19 @@ class Results extends React.Component {
         let items = [];
         let hasResult = false;
         if (this.state.loading) {
-            let SearchComponent = allSearchTypes.searchTypes[this.state.type].component;
             for (let idx = 0; idx < 10; idx++) {
-                items.push(
-                    <SearchComponent item={null} key={`${this.state.type}template${idx}`} />
-                );
+                items.push(this.renderItem(idx));
             }
         }
         else if (this.state.result && this.state.result.items && this.state.result.items.length) {
-            let SearchComponent = allSearchTypes.searchTypes[this.state.type].component;
             this.state.result.items.forEach(item => {
-                items.push(
-                    <SearchComponent item={item} key={`${this.state.type}${item.id ? item.id : item.name}`} />
-                );
+                items.push(this.renderItem(item.id, item));
             });
             hasResult = true;
         }
         else {
             items.push(
-                <div className='gth-empty'>We couldn’t find any {allSearchTypes.searchTypes[this.state.type].title} matching '{this.lastQuery}'</div>
+                <div className='gth-empty' key='empty'>We couldn’t find any {this.title} matching '{this.lastQuery}'</div>
             );
         }
         return (
@@ -155,10 +139,10 @@ class Results extends React.Component {
                                 return (<span>{Number(this.state.result && this.state.result.total_count !== undefined ? this.state.result.total_count : 0).toLocaleString('en-us')}</span>);
                             }
                         })()}
-                        <span>{allSearchTypes.searchTypes[this.state.type].title} results</span>
+                        <span>{this.title} results</span>
                     </h3>
                 </div>
-                <div className={`gth-${this.state.type}-list`}>
+                <div className={`gth-${this.type}-list`}>
                     {items}
                 </div>
                 <Pager
@@ -172,4 +156,4 @@ class Results extends React.Component {
     }
 }
 
-export default withRouter(Results);
+export default BaseList;
